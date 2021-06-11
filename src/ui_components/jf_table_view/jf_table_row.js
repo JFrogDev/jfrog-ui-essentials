@@ -167,7 +167,11 @@ class jfTableRowController {
     }
 
     onClickCell(col, event) {
-//        event.stopPropagation();
+	    if (!$(event.target).closest('.jf-table-row').hasClass('drag-mark')) {
+	        event.stopPropagation();
+	        return;
+        }
+	    //        event.stopPropagation();
         if (this.rowId === 'headers' && col.header && this.tableView.options.sortable && !this.hoveringResize && col.sortable) {
             this.tableView.options.sortBy(col.field);
         }
